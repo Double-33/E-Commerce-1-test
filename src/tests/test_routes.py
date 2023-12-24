@@ -1,3 +1,6 @@
+import sys
+print(sys.path)
+
 import unittest
 from flask import Flask
 from flask.testing import FlaskClient
