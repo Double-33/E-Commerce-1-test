@@ -1,19 +1,36 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from flask_jwt_extended import JWTManager
+from flask_login import LoginManager
 
 db = SQLAlchemy()
+jwt = JWTManager()
+login_manager = LoginManager()
 
 def create_app():
     app = Flask(__name__)
 
     # Configurations
     app.config.from_pyfile('config.py')
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    app.config['SECRET_KEY'] = 'your_secret_key'  # Change this to a secure key
+    app.config['JWT_SECRET_KEY'] = 'your_jwt_secret_key'  # Change this to a secure key
 
-    # Initialize the database
+    # Initialize extensions
     db.init_app(app)
+    jwt.init_app(app)
+    login_manager.init_app(app)
 
     # Register blueprints
-    from .routes import api
+    from app.routes import api  # Correct import path
     app.register_blueprint(api)
+
+    # Configure Flask-Login
+    from app.models import User  # Correct import path
+    login_manager.login_view = 'api.login'
+
+    @login_manager.user_loader
+    def load_user(user_id):
+        return User.query.get(int(user_id))
 
     return app
