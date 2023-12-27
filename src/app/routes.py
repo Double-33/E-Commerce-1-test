@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify, render_template, session, redirect, url_for
 from flask_restful import Resource, Api
 from flask_jwt_extended import jwt_required, get_jwt_identity, current_user
-from app.models import db, User, Product, Order, OrderProduct
+from src.app.models import db, User, Product, Order, OrderProduct
 
 api = Blueprint('api', __name__)
 api_restful = Api(api)
