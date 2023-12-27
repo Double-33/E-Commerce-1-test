@@ -22,11 +22,11 @@ def create_app():
     login_manager.init_app(app)
 
     # Register blueprints
-    from app.routes import api  # Correct import path
+    from src.app.routes import api  # Correct import path
     app.register_blueprint(api)
 
     # Configure Flask-Login
-    from app.models import User  # Correct import path
+    from src.app.models import User  # Correct import path
     login_manager.login_view = 'api.login'
 
     @login_manager.user_loader
