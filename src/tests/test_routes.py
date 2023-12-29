@@ -1,3 +1,5 @@
+# test_routes.py
+
 import sys
 print(sys.path)
 
@@ -25,9 +27,11 @@ class TestAPI(unittest.TestCase):
         app.config['JWT_HEADER_NAME'] = 'Authorization'
         app.config['JWT_HEADER_TYPE'] = 'Bearer'
 
-        with app.app_context():
-            db.init_app(app)
-            db.create_all()
+        # Push the app context
+        app.app_context().push()
+
+        db.init_app(app)
+        db.create_all()
 
         app.register_blueprint(api)
 
@@ -35,8 +39,10 @@ class TestAPI(unittest.TestCase):
         self.client = app.test_client()
 
     def tearDown(self):
-        with self.app.app_context():
-            db.session.remove()
-            db.drop_all()
+        # Pop the app context
+        self.app.app_context().pop()
+
+        db.session.remove()
+        db.drop_all()
 
     # ... rest of your test code

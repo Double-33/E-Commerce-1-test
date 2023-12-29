@@ -1,8 +1,15 @@
-from src import create_app
+# run.py
+import sys
+print(sys.path)
+
+from src.app import create_app
 from src.app.models import db
 
 if __name__ == '__main__':
     app = create_app()
+
+    # Initialize extensions
+    db.init_app(app)
 
     # Create the database tables
     with app.app_context():
