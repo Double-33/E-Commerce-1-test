@@ -1,5 +1,4 @@
 # run.py
-<<<<<<< Updated upstream
 import sys
 print(sys.path)
 
@@ -15,14 +14,13 @@ if __name__ == '__main__':
     # Create the database tables
     with app.app_context():
         db.create_all()
-=======
 
-from src import create_app
+
+from src.app import create_app
 from src.app.models import db
 
 if __name__ == '__main__':
  src = create_app()
->>>>>>> Stashed changes
 
 if __name__ == '__main__':
     # Create the database tables using Flask CLI command or initialization script

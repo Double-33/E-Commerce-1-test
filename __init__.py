@@ -19,7 +19,7 @@ def create_app():
     app.config['JWT_SECRET_KEY'] = 'your_jwt_secret_key'  # Change this to a secure key
 
     # Initialize extensions
-    db.init_app(app)
+    #db.init_app(app)
     jwt.init_app(app)
     login_manager.init_app(app)
 
