@@ -1,0 +1,5 @@
+
+If when running "db.create_all()" from the Python interpreter you experience "RuntimeError: Working outside of application context.", instead run the following three lines:
+>>> from app import app, db
+>>> app.app_context().push()
+>>> db.create_all()
