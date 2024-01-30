@@ -9,7 +9,7 @@ if __name__ == '__main__':
     app = create_app()
 
     # Initialize extensions
-    db.init_app(app)
+    #db.init_app(app)
 
     # Create the database tables
     with app.app_context():
